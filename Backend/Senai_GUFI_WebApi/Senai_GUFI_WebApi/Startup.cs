@@ -8,7 +8,9 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Senai_GUFI_WebApi
@@ -29,11 +31,14 @@ namespace Senai_GUFI_WebApi
 
 
             //Adiciona serviços do Swagger - documentação
-            services.AddSwaggerGen(c=> {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gufi.webApi", Version = "v1" });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gufi.webAPI", Version = "v1" });
 
-
-                //INCLUIR COMENTÁRIOS
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
             services
@@ -42,7 +47,7 @@ namespace Senai_GUFI_WebApi
                     options.DefaultChallengeScheme = "JwtBearer";
                 })
 
-            .AddBearer("JwtBearer", options =>
+            .AddJwtBearer("JwtBearer", options =>
              {
                  options.TokenValidationParameters = new TokenValidationParameters
                  {
@@ -53,9 +58,9 @@ namespace Senai_GUFI_WebApi
 
                      ClockSkew = TimeSpan.FromMinutes(30),
 
-                     ValidIssuer = "Gufi.webApi",
+                     ValidIssuer = "gufi.webApi",
 
-                     ValidAudience = "Gufi.webApi"
+                     ValidAudience = "gufi.webApi"
                  };
              });
 
@@ -78,6 +83,7 @@ namespace Senai_GUFI_WebApi
                 c.RoutePrefix = string.Empty;
             });
 
+            app.UseRouting();
 
             //Autenticação
             app.UseAuthentication();
@@ -85,8 +91,6 @@ namespace Senai_GUFI_WebApi
 
             //Autorização
             app.UseAuthorization();
-
-            app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {

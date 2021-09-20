@@ -59,8 +59,8 @@ namespace Senai_GUFI_WebApi.Controllers
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                 var meuToken = new JwtSecurityToken(
-                    issuer: "Gufi.WebAPI",
-                    audience:"Gufi.WebAPI",
+                    issuer: "gufi.WebAPI",
+                    audience:"gufi.WebAPI",
                     claims: minhasClaims,
                     expires: DateTime.Now.AddMinutes(30),
                     signingCredentials: creds
