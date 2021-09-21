@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Senai_GUFI_WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:Senai_GUFI_WebApi.Controllers.LoginController.Login(Senai_GUFI_WebApi.ViewModels.LoginViewModel)">
+            <summary>
+            Valida o usuário
+            </summary>
+            <param name="login">objeto login que contém o email e a senha do usuario</param>
+            <returns>retorna um token com as informações do usuario</returns>
+        </member>
+        <member name="T:Senai_GUFI_WebApi.Interfaces.IPresencaRepository">
+            <summary>
+            Interface   responsável pelo PresencaRepository
+            </summary>
+        </member>
+        <member name="M:Senai_GUFI_WebApi.Interfaces.IPresencaRepository.ListarMinhas(System.Int32)">
+            <summary>
+            Lista os eventos de um determinado usuario
+            </summary>
+            <param name="idUsuario">id do usuario que participa dos eventos listados</param>
+            <returns>Uma lista de presenças com os dados dos eventos</returns>
+        </member>
+        <member name="M:Senai_GUFI_WebApi.Interfaces.IPresencaRepository.Inscrever(Senai_GUFI_WebApi.Domains.Presenca)">
+            <summary>
+            Cria uma nova presenca
+            </summary>
+            <param name="inscricao">objeto com as informações da inscrição</param>
+        </member>
+        <member name="M:Senai_GUFI_WebApi.Interfaces.IPresencaRepository.AprovarRecusar(System.Int32,System.String)">
+            <summary>
+            Altera o status de uma presenca
+            </summary>
+            <param name="idPresenca">id da presenca que tera sua situacao atualizada</param>
+            <param name="status">parâmetro que atualiza a situacao para 1-Aprovada/ 2-Recusada / 3-Aguardando</param>
+        </member>
+        <member name="M:Senai_GUFI_WebApi.Interfaces.IUsuarioRepository.Login(System.String,System.String)">
+            <summary>
+            valida o usuário
+            </summary>
+            <param name="email">email do usuario</param>
+            <param name="senha">senha do usuario</param>
+            <returns>Objeto do tipo Usuario que foi encontrado</returns>
+        </member>
+        <member name="T:Senai_GUFI_WebApi.Repositories.PresencaRepository">
+            <summary>
+            Repository responsável pelas presencas
+            </summary>
+        </member>
+        <member name="F:Senai_GUFI_WebApi.Repositories.PresencaRepository.ctx">
+            <summary>
+            Objeto de contexto por onde serão chamados os métodos FrameworkCore
+            </summary>
+        </member>
+        <member name="T:Senai_GUFI_WebApi.ViewModels.LoginViewModel">
+            <summary>
+            Classe responsável pelo modelo de Login
+            </summary>
+        </member>
+    </members>
+</doc>

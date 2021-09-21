@@ -58,9 +58,9 @@ namespace Senai_GUFI_WebApi
 
                      ClockSkew = TimeSpan.FromMinutes(30),
 
-                     ValidIssuer = "gufi.webApi",
+                     ValidIssuer = "gufi.WebAPI",
 
-                     ValidAudience = "gufi.webApi"
+                     ValidAudience = "gufi.WebAPI"
                  };
              });
 

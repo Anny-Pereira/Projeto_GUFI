@@ -64,3 +64,7 @@ ON Usuario.idTipoUsuario = TipoUsuario.idTipoUsuario
 WHERE email = 'lucas@gmail'
 AND senha = '111';
 GO
+
+SELECT * FROM Evento
+
+SELECT * FROM Presenca WHERE idUsuario = 2
