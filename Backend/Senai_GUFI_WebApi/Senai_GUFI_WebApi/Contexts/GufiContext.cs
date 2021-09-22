@@ -19,6 +19,7 @@ namespace Senai_GUFI_WebApi.Contexts
         }
 
         public virtual DbSet<Evento> Eventos { get; set; }
+        public virtual DbSet<ImagemUsuario> ImagemUsuarios { get; set; }
         public virtual DbSet<Instituicao> Instituicaos { get; set; }
         public virtual DbSet<Presenca> Presencas { get; set; }
         public virtual DbSet<Situacao> Situacaos { get; set; }
@@ -31,12 +32,7 @@ namespace Senai_GUFI_WebApi.Contexts
             if (!optionsBuilder.IsConfigured)
             {
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-
-                //SENAI
-                //optionsBuilder.UseSqlServer("Data Source=NOTE0113D2\\SQLEXPRESS; initial catalog=GUFI; user Id=sa; pwd=Senai@132;");
-
-                //CASA
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-TUQ4VJR\\SQLEXPRESS; initial catalog=GUFI; user Id=sa; pwd=senai@132;");
+                optionsBuilder.UseSqlServer("Data Source=NOTE0113D1\\SQLEXPRESS; initial catalog=GUFI; user Id=sa; pwd=Senai@132;");
             }
         }
 
@@ -47,7 +43,7 @@ namespace Senai_GUFI_WebApi.Contexts
             modelBuilder.Entity<Evento>(entity =>
             {
                 entity.HasKey(e => e.IdEvento)
-                    .HasName("PK__Evento__C8DC7BDAE06C3A61");
+                    .HasName("PK__Evento__C8DC7BDA23CBE0B1");
 
                 entity.ToTable("Evento");
 
@@ -80,25 +76,67 @@ namespace Senai_GUFI_WebApi.Contexts
                 entity.HasOne(d => d.IdInstituicaoNavigation)
                     .WithMany(p => p.Eventos)
                     .HasForeignKey(d => d.IdInstituicao)
-                    .HasConstraintName("FK__Evento__idInstit__46E78A0C");
+                    .HasConstraintName("FK__Evento__idInstit__34C8D9D1");
 
                 entity.HasOne(d => d.IdTipoEventoNavigation)
                     .WithMany(p => p.Eventos)
                     .HasForeignKey(d => d.IdTipoEvento)
-                    .HasConstraintName("FK__Evento__idTipoEv__45F365D3");
+                    .HasConstraintName("FK__Evento__idTipoEv__33D4B598");
+            });
+
+            modelBuilder.Entity<ImagemUsuario>(entity =>
+            {
+                entity.HasKey(e => e.IdImagemUsuario)
+                    .HasName("PK__imagemUs__078BE9702E16CA00");
+
+                entity.ToTable("imagemUsuario");
+
+                entity.HasIndex(e => e.IdUsuario, "UQ__imagemUs__645723A7C220FA96")
+                    .IsUnique();
+
+                entity.Property(e => e.IdImagemUsuario).HasColumnName("idImagemUsuario");
+
+                entity.Property(e => e.Binario)
+                    .IsRequired()
+                    .HasColumnName("binario");
+
+                entity.Property(e => e.DataInclusao)
+                    .HasColumnType("datetime")
+                    .HasColumnName("data_inclusao")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
+
+                entity.Property(e => e.MimeType)
+                    .IsRequired()
+                    .HasMaxLength(80)
+                    .IsUnicode(false)
+                    .HasColumnName("mimeType");
+
+                entity.Property(e => e.NomeArquivo)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("nomeArquivo");
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithOne(p => p.ImagemUsuario)
+                    .HasForeignKey<ImagemUsuario>(d => d.IdUsuario)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__imagemUsu__idUsu__3F466844");
             });
 
             modelBuilder.Entity<Instituicao>(entity =>
             {
                 entity.HasKey(e => e.IdInstituicao)
-                    .HasName("PK__Institui__8EA7AB006FA1F44B");
+                    .HasName("PK__Institui__8EA7AB00E3E1F31C");
 
                 entity.ToTable("Instituicao");
 
-                entity.HasIndex(e => e.Endereco, "UQ__Institui__9456D406F9B8E753")
+                entity.HasIndex(e => e.Endereco, "UQ__Institui__9456D4060BB2F58C")
                     .IsUnique();
 
-                entity.HasIndex(e => e.NomeInstituicao, "UQ__Institui__E28517EA95F671F6")
+                entity.HasIndex(e => e.NomeInstituicao, "UQ__Institui__E28517EA6EBC6C50")
                     .IsUnique();
 
                 entity.Property(e => e.IdInstituicao).HasColumnName("idInstituicao");
@@ -125,7 +163,7 @@ namespace Senai_GUFI_WebApi.Contexts
             modelBuilder.Entity<Presenca>(entity =>
             {
                 entity.HasKey(e => e.IdPresenca)
-                    .HasName("PK__Presenca__44CEA42739046601");
+                    .HasName("PK__Presenca__44CEA42731491F1D");
 
                 entity.ToTable("Presenca");
 
@@ -142,23 +180,23 @@ namespace Senai_GUFI_WebApi.Contexts
                 entity.HasOne(d => d.IdEventoNavigation)
                     .WithMany(p => p.Presencas)
                     .HasForeignKey(d => d.IdEvento)
-                    .HasConstraintName("FK__Presenca__idEven__4BAC3F29");
+                    .HasConstraintName("FK__Presenca__idEven__398D8EEE");
 
                 entity.HasOne(d => d.IdSituacaoNavigation)
                     .WithMany(p => p.Presencas)
                     .HasForeignKey(d => d.IdSituacao)
-                    .HasConstraintName("FK__Presenca__idSitu__4CA06362");
+                    .HasConstraintName("FK__Presenca__idSitu__3A81B327");
 
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Presencas)
                     .HasForeignKey(d => d.IdUsuario)
-                    .HasConstraintName("FK__Presenca__idUsua__4AB81AF0");
+                    .HasConstraintName("FK__Presenca__idUsua__38996AB5");
             });
 
             modelBuilder.Entity<Situacao>(entity =>
             {
                 entity.HasKey(e => e.IdSituacao)
-                    .HasName("PK__Situacao__12AFD197AAE2C408");
+                    .HasName("PK__Situacao__12AFD197B84BC874");
 
                 entity.ToTable("Situacao");
 
@@ -173,11 +211,11 @@ namespace Senai_GUFI_WebApi.Contexts
             modelBuilder.Entity<TipoEvento>(entity =>
             {
                 entity.HasKey(e => e.IdTipoEvento)
-                    .HasName("PK__TipoEven__09EED93A0B6BD7B7");
+                    .HasName("PK__TipoEven__09EED93AD762AA34");
 
                 entity.ToTable("TipoEvento");
 
-                entity.HasIndex(e => e.TituloTipoEvento, "UQ__TipoEven__D2A1CBBBC212FD12")
+                entity.HasIndex(e => e.TituloTipoEvento, "UQ__TipoEven__D2A1CBBBD6CEF239")
                     .IsUnique();
 
                 entity.Property(e => e.IdTipoEvento).HasColumnName("idTipoEvento");
@@ -192,11 +230,11 @@ namespace Senai_GUFI_WebApi.Contexts
             modelBuilder.Entity<TipoUsuario>(entity =>
             {
                 entity.HasKey(e => e.IdTipoUsuario)
-                    .HasName("PK__TipoUsua__03006BFF2748C05C");
+                    .HasName("PK__TipoUsua__03006BFF37FC08C5");
 
                 entity.ToTable("TipoUsuario");
 
-                entity.HasIndex(e => e.TituloTipoUsuario, "UQ__TipoUsua__C6B29FC3A1339051")
+                entity.HasIndex(e => e.TituloTipoUsuario, "UQ__TipoUsua__C6B29FC353FEBC26")
                     .IsUnique();
 
                 entity.Property(e => e.IdTipoUsuario).HasColumnName("idTipoUsuario");
@@ -211,11 +249,11 @@ namespace Senai_GUFI_WebApi.Contexts
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__Usuario__645723A646A88906");
+                    .HasName("PK__Usuario__645723A669FAEE32");
 
                 entity.ToTable("Usuario");
 
-                entity.HasIndex(e => e.Email, "UQ__Usuario__AB6E6164B903DD3D")
+                entity.HasIndex(e => e.Email, "UQ__Usuario__AB6E6164D8637F7D")
                     .IsUnique();
 
                 entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
@@ -243,7 +281,7 @@ namespace Senai_GUFI_WebApi.Contexts
                 entity.HasOne(d => d.IdTipoUsuarioNavigation)
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.IdTipoUsuario)
-                    .HasConstraintName("FK__Usuario__idTipoU__4316F928");
+                    .HasConstraintName("FK__Usuario__idTipoU__30F848ED");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -61,3 +61,14 @@ idEvento INT FOREIGN KEY REFERENCES Evento(idEvento),
 idSituacao INT FOREIGN KEY REFERENCES Situacao(idSituacao) DEFAULT (3)
 );
 GO
+
+
+CREATE TABLE imagemUsuario(
+idImagemUsuario INT PRIMARY KEY IDENTITY (1,1),
+idUsuario INT FOREIGN KEY REFERENCES Usuario(idUsuario) NOT NULL UNIQUE,
+binario VARBINARY(MAX) NOT NULL,
+mimeType VARCHAR(80) NOT NULL,
+nomeArquivo VARCHAR(250) NOT NULL,
+data_inclusao DATETIME DEFAULT GETDATE() NOT NULL
+);
+GO
