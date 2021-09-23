@@ -30,19 +30,16 @@ namespace Senai_GUFI_WebApi.Controllers
         {
             try
             {
-                //Anlisar tamanho do arquivo
+                //Anlisar tamanho do arquivo (bytes)
                 if (arquivo.Length > 5000) //5MB
                 {
                     return BadRequest(new { mensagem = "O tamnho máximo da imagem foi atingido!" });
-
-                    //Análise da extensão do arquivo
-                    //Split = retorna uma matriz de caracteres
-                    //Last = Reupera a últim posicao da matriz
-                    
                 }
 
 
-
+            //Análise da extensão do arquivo
+            //Split = retorna uma matriz de caracteres
+            //Last = Reupera a últim posicao da matriz
                 string extensao = arquivo.FileName.Split('.').Last();
 
                 if (extensao != "png")
@@ -61,27 +58,96 @@ namespace Senai_GUFI_WebApi.Controllers
 
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return BadRequest(ex.Message);
             }
         }
 
 
+        [Authorize(Roles = "1,2")]
         [HttpGet("imagem/bd")]
         public IActionResult getBD()
         {
             try
             {
+                //recupera id do usuario a partir do token
+                int IdUsuario = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
 
+
+                string base64 = _usuarioRepository.ConsultarPerfilBD(IdUsuario);
+
+                return Ok(base64);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return BadRequest(ex.Message);
             }
         }
-        
+
+
+
+        [Authorize(Roles = "1,2")]
+        [HttpPost("imagem/dir")]
+        public IActionResult postDir(IFormFile arquivo)
+        {
+            try
+            {
+                //Anlisar tamanho do arquivo (bytes)
+                if (arquivo.Length > 5000) //5MB
+                {
+                    return BadRequest(new { mensagem = "O tamnho máximo da imagem foi atingido!" });
+                }
+
+
+                //Análise da extensão do arquivo
+                //Split = retorna uma matriz de caracteres
+                //Last = Reupera a últim posicao da matriz
+                string extensao = arquivo.FileName.Split('.').Last();
+
+                if (extensao != "png")
+                {
+                    return BadRequest(new { mensagem = "Apenas arquivos .png são obrigatórios." });
+                }
+
+
+                //recupera id do usuario a partir do token
+                int IdUsuario = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
+
+
+                _usuarioRepository.SalvarPerfilDir(arquivo, IdUsuario);
+
+                return Ok();
+
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
+
+        [Authorize(Roles = "1,2")]
+        [HttpGet("imagem/dir")]
+        public IActionResult getDir()
+        {
+            try
+            {
+                //recupera id do usuario a partir do token
+                int IdUsuario = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
+
+
+                string base64 = _usuarioRepository.ConsultarPerfilDir(IdUsuario);
+
+                return Ok(base64);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
