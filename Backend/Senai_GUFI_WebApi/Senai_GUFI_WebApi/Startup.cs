@@ -30,7 +30,19 @@ namespace Senai_GUFI_WebApi
                });
 
 
-            //Adiciona serviços do Swagger - documentação
+               services.AddCors(options =>
+                    {
+                        options.AddPolicy("CorPolicy",
+                                        builder =>
+                                        {
+                                            builder.WithOrigins("http://localhost:3000")
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod();
+                                        });
+                    });
+
+
+            //Adiciona serviï¿½os do Swagger - documentaï¿½ï¿½o
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gufi.webAPI", Version = "v1" });
@@ -85,11 +97,13 @@ namespace Senai_GUFI_WebApi
 
             app.UseRouting();
 
-            //Autenticação
+            app.UseCors("CorPolicy");
+
+            //Autenticaï¿½ï¿½o
             app.UseAuthentication();
 
 
-            //Autorização
+            //Autorizaï¿½ï¿½o
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

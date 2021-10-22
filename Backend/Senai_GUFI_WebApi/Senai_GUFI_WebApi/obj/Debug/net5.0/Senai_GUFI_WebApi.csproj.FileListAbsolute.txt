@@ -135,3 +135,4 @@ C:\Users\elilt\OneDrive\Documentos\SENAI\Projeto_GUFI\Backend\Senai_GUFI_WebApi\
 C:\Users\elilt\OneDrive\Documentos\SENAI\Projeto_GUFI\Backend\Senai_GUFI_WebApi\Senai_GUFI_WebApi\obj\Debug\net5.0\Senai_GUFI_WebApi.genruntimeconfig.cache
 C:\Users\fic\Desktop\Projeto_GUFI\Backend\Senai_GUFI_WebApi\Senai_GUFI_WebApi\obj\Debug\net5.0\Senai_GUFI_WebApi.xml
 C:\Users\fic\Desktop\Projeto_GUFI\Backend\Senai_GUFI_WebApi\Senai_GUFI_WebApi\bin\Debug\net5.0\Senai_GUFI_WebApi.xml
+C:\Users\elilt\OneDrive\Documentos\SENAI\Projeto_GUFI\Backend\Senai_GUFI_WebApi\Senai_GUFI_WebApi\obj\Debug\net5.0\Senai_GUFI_WebApi.csproj.AssemblyReference.cache
