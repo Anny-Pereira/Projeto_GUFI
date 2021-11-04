@@ -1,4 +1,4 @@
-import { Component } from 'ract';
+import { Component } from 'react';
 
 export default class Login extends Component {
     constructor(props) {
@@ -35,6 +35,35 @@ export default class Login extends Component {
                     localStorage.setItem('usuario-token', resposta.data.token);
                     //E define que a requisição terminou
                     this.setState({ isLoading: false })
+
+
+
+                     // define a variável base64 que vai receber o payload do token
+                     let base64 = localStorage.getItem('usuario-login').split('.')[1];
+                     // exibe no console do navegador o valor em base64
+                     console.log(base64);
+ 
+                     // exibe no console o valor decodificado de base64 para string
+                     // console.log(window.atob(base64));
+ 
+                     // exibe no console do navegador o valor da chave role
+                     // console.log( JSON.parse( window.atob(base64) ) );
+ 
+                     // console.log( parseJwt().role );
+ 
+                     // exibe as propriedades da página
+                     console.log(this.props);
+ 
+                     // verifica se o usuário logado é do tipo administrador
+                     if (parseJwt().role === '1' ) {
+                         this.props.history.push('/tiposeventos');
+                         console.log('estou logado: ' + usuarioAutenticado())
+                     }
+ 
+                     else{
+                         this.props.history.push('/');
+                     }
+
                 }
             })
 

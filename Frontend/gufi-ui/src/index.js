@@ -12,9 +12,10 @@ import Login from './pages/login/login';
 import reportWebVitals from './reportWebVitals';
 
 const routing = (
+    //Container de rotas - Lógica pra construir rotas
   <Router>
     <div>
-      <Switch>
+    <Switch> {/*Criado para trocar o componente q irá aparecer*/}
         <Route exact path="/" component={Home} /> {/* Home */}
         <Route path="/tiposEventos" component={TiposEventos} /> {/* Tipos Eventos */}
         <Route path="/notFound" component={NotFound} /> {/* Not Found */}

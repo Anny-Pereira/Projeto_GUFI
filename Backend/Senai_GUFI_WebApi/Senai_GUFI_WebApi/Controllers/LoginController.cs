@@ -50,7 +50,8 @@ namespace Senai_GUFI_WebApi.Controllers
                 {
                     new Claim(JwtRegisteredClaimNames.Email, usuariobuscado.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, usuariobuscado.IdUsuario.ToString()),
-                    new Claim(ClaimTypes.Role, usuariobuscado.IdTipoUsuario.ToString())
+                    new Claim(ClaimTypes.Role, usuariobuscado.IdTipoUsuario.ToString()),
+                    new Claim("role", usuariobuscado.IdTipoUsuario.ToString())
                 };
 
                 var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("gufi-chave-autenticacao"));
