@@ -21,6 +21,7 @@ const routing = (
         <Route path="/notFound" component={NotFound} /> {/* Not Found */}
         <Route path="/login" component={Login} /> {/* Login */}
         <Redirect to="/notFound" /> {/* Redireciona para Not Found caso não encontre nenhuma rota */}
+        <Route path="/eventos" component={Eventos} /> {/* Redireciona para Eventos */}
       </Switch>
     </div>
   </Router>
