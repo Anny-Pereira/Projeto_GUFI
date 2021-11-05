@@ -64,6 +64,8 @@ export default class Eventos extends Component {
                 console.log(this.state. listaInstituicao);
             }
         })
+
+        .catch((erro) => console.log(erro));
     }
 
 
@@ -82,6 +84,13 @@ export default class Eventos extends Component {
          //caso ocorra algum erro, mostra no console do navegador
         .catch(erro => console.log(erro));
     }
+
+    atualizaStateCampo = (campo) => {
+        // quando estiver digitando no campo username
+        //                     email        :       adm@adm.com
+    
+        this.setState({ [campo.target.name]: campo.target.value });
+      };
 
 
     componentDidMount(){
@@ -124,6 +133,154 @@ export default class Eventos extends Component {
             console.log(erro);
             this.setState({isLoading: false})
         } )
+        
+        .then(this.buscaEventos);
     }
+
+
+    render() {
+        return (
+          <>
+            <main>
+              <section>
+                {/* Lista de Eventos */}
+                <h2>Lista de Eventos</h2>
+                <table style={{ borderCollapse: 'separate', borderSpacing: 30 }}>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Evento</th>
+                      <th>Descrição</th>
+                      <th>Data</th>
+                      <th>Acesso Livre</th>
+                      <th>Tipo de Evento</th>
+                      <th>Localização</th>
+                    </tr>
+                  </thead>
+    
+                  <tbody>
+                    {/* Preenche o corpo da tabela utilizando a funcao map(). */}
+    
+                    {/* <tr><td>teste de linha</td></tr>  */}
+                    {this.state.listaEventos.map((evento) => {
+                      return (
+                        <tr key={evento.idEvento}>
+                          <td>{evento.idEvento}</td>
+                          <td>{evento.nomeEvento}</td>
+                          <td>{evento.descricao}</td>
+                          <td>{evento.dataEvento}</td>
+                          <td>{evento.acessoLivre ? 'Livre' : 'Restrito'}</td>
+                          <td>{evento.idTipoEventoNavigation.tituloTipoEvento}</td>
+                          <td>{evento.idInstituicaoNavigation.endereco}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </section>
+    
+              <section>
+                {/* Cadastro de Eventos */}
+                <h2>Cadastro de Eventos</h2>
+                <form onSubmit={this.cadastrarEvento}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '20vw',
+                    }}
+                  >
+                    <input
+                      required
+                      type="text"
+                      name="titulo"
+                      value={this.state.titulo}
+                      onChange={this.atualizaStateCampo}
+                      placeholder="Titulo do Evento"
+                    />
+    
+                    <input
+                      required
+                      type="text"
+                      name="descricao"
+                      value={this.state.descricao}
+                      onChange={this.atualizaStateCampo}
+                      placeholder="Descrição do Evento"
+                    />
+    
+                    <input
+                      type="date"
+                      name="dataEvento"
+                      value={this.state.dataEvento}
+                      onChange={this.atualizaStateCampo}
+                    />
+    
+                    <select
+                      name="idTipoEvento"
+                      value={this.state.idTipoEvento}
+                      onChange={this.atualizaStateCampo}
+                    >
+                      <option value="0" selected disabled>
+                        Selecione o tema do evento
+                      </option>
+    
+                      {/* utilizar a funcao map() */}
+    
+                      {this.state.listaTiposEventos.map((tema) => {
+                        return (
+                          <option key={tema.idTipoEvento} value={tema.idTipoEvento}>
+                            {tema.tituloTipoEvento}
+                          </option>
+                        );
+                      })}
+                    </select>
+    
+                    <select
+                      name="idInstituicao"
+                      value={this.state.idInstituicao}
+                      onChange={this.atualizaStateCampo}
+                    >
+                      <option value="0" selected disabled>
+                        Selecione a instituição
+                      </option>
+    
+                      {/* utilizar a funcao map() */}
+    
+                      {this.state.listaInstituicao.map((tema) => {
+                        return (
+                          <option
+                            key={tema.idInstituicao}
+                            value={tema.idInstituicao}
+                          >
+                            {tema.nomeFantasia}
+                          </option>
+                        );
+                      })}
+                    </select>
+    
+                    <select
+                      name="acessoLivre"
+                      value={this.state.acessoLivre}
+                      onChange={this.atualizaStateCampo}
+                    >
+                      <option value="">Selecione o acesso</option>
+                      <option value="1">Livre</option>
+                      <option value="0">Restrito</option>
+                    </select>
+    
+                    {this.state.isLoading === true && (
+                      <button type="submit">Loading...</button>
+                    )}
+    
+                    {this.state.isLoading === false && (
+                      <button type="submit">Cadastrar</button>
+                    )}
+                  </div>
+                </form>
+              </section>
+            </main>
+          </>
+        );
+      }
 
  }
