@@ -8,6 +8,8 @@ import Home from './pages/home/App';
 import TiposEventos from './pages/tiposEventos/TiposEventos.jsx';
 import NotFound from './pages/notFound/NotFound';
 import Login from './pages/login/login';
+import Eventos from './Pages/eventos/eventos';
+import TiposUsuarios from './Pages/tiposUsuarios/tiposUsuarios';
 
 import reportWebVitals from './reportWebVitals';
 
@@ -17,11 +19,12 @@ const routing = (
     <div>
     <Switch> {/*Criado para trocar o componente q irá aparecer*/}
         <Route exact path="/" component={Home} /> {/* Home */}
-        <Route path="/tiposEventos" component={TiposEventos} /> {/* Tipos Eventos */}
+        <PermissaoAdm path="/tiposEventos" component={TiposEventos} /> {/* Tipos Eventos */}
         <Route path="/notFound" component={NotFound} /> {/* Not Found */}
         <Route path="/login" component={Login} /> {/* Login */}
         <Redirect to="/notFound" /> {/* Redireciona para Not Found caso não encontre nenhuma rota */}
         <Route path="/eventos" component={Eventos} /> {/* Redireciona para Eventos */}
+        <Route path="/tipoUsuarios" component={TiposUsuarios} /> {/* Redireciona para TiposUsuarios */}
       </Switch>
     </div>
   </Router>
