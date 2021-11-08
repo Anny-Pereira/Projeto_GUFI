@@ -37,7 +37,7 @@ export default function TiposUsuarios(){
         })
 
         //Caso ocorra algum erro, mostra no console do navegador
-        .cath(erro=> console.log(erro));
+        .catch(erro => console.log(erro));
     };
 
 
@@ -129,6 +129,17 @@ export default function TiposUsuarios(){
                                 <button type="submit" disabled>Carregando...</button>
                             }
                             {/* <button type="submit">Cadastrar</button> */}
+
+                             {/* {
+                                outra forma - if ternário
+
+                                isLoading === false ? (
+                                    <button type="submit">Cadastrar</button>
+                                 ) : ( 
+                                    <button type="submit" disabled>Carregando...</button>
+                                 )
+                            } */}
+
                         </div>
                     </form>
                 </section>

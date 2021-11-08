@@ -199,7 +199,6 @@ C:\Users\45597675800\Documents\SENAI DM\Projeto_GUFI\Backend\Senai_GUFI_WebApi\S
 C:\Users\45597675800\Documents\SENAI DM\Projeto_GUFI\Backend\Senai_GUFI_WebApi\Senai_GUFI_WebApi\obj\Debug\net5.0\staticwebassets\Senai_GUFI_WebApi.StaticWebAssets.xml
 C:\Users\45597675800\Documents\SENAI DM\Projeto_GUFI\Backend\Senai_GUFI_WebApi\Senai_GUFI_WebApi\obj\Debug\net5.0\scopedcss\bundle\Senai_GUFI_WebApi.styles.css
 C:\Users\45597675800\Documents\SENAI DM\Projeto_GUFI\Backend\Senai_GUFI_WebApi\Senai_GUFI_WebApi\obj\Debug\net5.0\Senai_GUFI_WebApi.RazorTargetAssemblyInfo.cache
-C:\Users\45597675800\Documents\SENAI DM\Projeto_GUFI\Backend\Senai_GUFI_WebApi\Senai_GUFI_WebApi\obj\Debug\net5.0\Senai_GUFI_WebApi.csproj.CopyComplete
 C:\Users\45597675800\Documents\SENAI DM\Projeto_GUFI\Backend\Senai_GUFI_WebApi\Senai_GUFI_WebApi\obj\Debug\net5.0\Senai_GUFI_WebApi.dll
 C:\Users\45597675800\Documents\SENAI DM\Projeto_GUFI\Backend\Senai_GUFI_WebApi\Senai_GUFI_WebApi\obj\Debug\net5.0\ref\Senai_GUFI_WebApi.dll
 C:\Users\45597675800\Documents\SENAI DM\Projeto_GUFI\Backend\Senai_GUFI_WebApi\Senai_GUFI_WebApi\obj\Debug\net5.0\Senai_GUFI_WebApi.xml

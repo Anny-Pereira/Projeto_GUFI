@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import axios from 'axios';
+
 
 export default class Eventos extends Component {
     constructor(props) {

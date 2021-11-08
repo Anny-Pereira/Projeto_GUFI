@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, BrowserRouter as Router, Redirect ,Switch } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Redirect, Switch } from 'react-router-dom';
+import { parseJwt, usuarioAutenticado } from '../src/services/auth';
 
 
 
@@ -29,19 +30,36 @@ const PermissaoAdm = ({ component: Component }) => (
   />
 );
 
+
+
+// const PermissaoComum = ({ component: Component }) => (
+//   <Route
+//     render={(props) =>
+//       usuarioAutenticado() && parseJwt().role === '2' ? (
+//         // operador spread
+//         <Component {...props} />
+//       ) : (
+//         <Redirect to="login" />
+//       )
+//     }
+//   />
+// );
+
+
+
 const routing = (
-    //Container de rotas - Lógica pra construir rotas
+  //Container de rotas - Lógica pra construir rotas
   <Router>
     <div>
-    <Switch> {/*Criado para trocar o componente q irá aparecer*/}
+      <Switch> {/*Criado para trocar o componente q irá aparecer*/}
         <Route exact path="/" component={App} /> {/* Home */}
         <PermissaoAdm path="/tiposEventos" component={TiposEventos} /> {/* Tipos Eventos */}
         <Route path="/notFound" component={NotFound} /> {/* Not Found */}
         <Route path="/login" component={Login} /> {/* Login */}
-        <Redirect to="/notFound" /> {/* Redireciona para Not Found caso não encontre nenhuma rota */}
         <Route path="/eventos" component={Eventos} /> {/* Redireciona para Eventos */}
         <Route path="/tipoUsuarios" component={TiposUsuarios} /> {/* Redireciona para TiposUsuarios */}
         <Route path="/perfil" component={Perfil} /> {/* Redireciona para Perfil */}
+        <Redirect to="/notFound" /> {/* Redireciona para Not Found caso não encontre nenhuma rota */}
       </Switch>
     </div>
   </Router>

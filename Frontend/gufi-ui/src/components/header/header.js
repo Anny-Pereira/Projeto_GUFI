@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import logo from '../../assets/img/logo.png'
+import React from "react";
+import logo from '../../assets/img/logo.png';
+import  {Link}  from 'react-router-dom';
 
 
 export default function Header() {
@@ -15,10 +16,8 @@ export default function Header() {
                 <nav className="cabecalhoPrincipal-nav">
                     Administrador
                 </nav>
-
-                <nav className="perfilHeader">
-                    <img alt="Imagem do Perfil" src={`data:image;base64,${this.state.base64img}`}></img>
-                </nav>
+                
+                {/* COMPONENTE PERFILFOTO */}
             </div>
         </header>
     )

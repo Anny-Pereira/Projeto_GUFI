@@ -3,7 +3,7 @@ import axios from 'axios';
 import Header from '../../components/header/header';
 import Rodape from '../../components/rodape/rodape';
 
-import { Link } from 'react-router-dom';
+
 import logo from '../../assets/img/logo.png';
 import Titulo from '../../components/titulo/titulo';
 
