@@ -1,8 +1,10 @@
 import { Component } from "react";
+import logo from '../../assets/img/logo.png'
 import Header from "../../components/header/header";
 
 import Rodape from "../../components/rodape/rodape";
 import Titulo from "../../components/titulo/titulo";
+
 
 export default class TiposEventos extends Component {
     constructor(props) {

@@ -44,7 +44,7 @@ export default function TiposUsuarios(){
     //ESTRUTURA HOOK UseEffect
     //useEffect(efeito, causa)
     //useEffect({o que vai ser feito}, {o que será escutado})
-    useEffect()
+    useEffect(buscarTiposUsuarios, []);
 
 
     //Função responsável por fazer a requisição que cadastra um novo tipo de usuario

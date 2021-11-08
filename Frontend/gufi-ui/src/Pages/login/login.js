@@ -1,4 +1,7 @@
 import { Component } from 'react';
+import axios from 'axios';
+import { parseJwt, usuarioAutenticado } from '../../services/auth';
+import { Link } from 'react-router-dom';
 
 export default class Login extends Component {
     constructor(props) {
@@ -17,7 +20,7 @@ export default class Login extends Component {
         //Ignora o comportamento padrão do navegador (recarregar página, por exemplo)
         event.preventDefalt();
 
-        this.setState({ errorMessage: '', isLoading: true});
+        this.setState({ errorMessage: '', isLoading: true });
 
         //Tudo oq coloca depois da vírgula é o corpo da requisição
         axios.post('http://localhost:5000/api/Login', {
@@ -38,41 +41,41 @@ export default class Login extends Component {
 
 
 
-                     // define a variável base64 que vai receber o payload do token
-                     let base64 = localStorage.getItem('usuario-login').split('.')[1];
-                     // exibe no console do navegador o valor em base64
-                     console.log(base64);
- 
-                     // exibe no console o valor decodificado de base64 para string
-                     // console.log(window.atob(base64));
- 
-                     // exibe no console do navegador o valor da chave role
-                     // console.log( JSON.parse( window.atob(base64) ) );
- 
-                     // console.log( parseJwt().role );
- 
-                     // exibe as propriedades da página
-                     console.log(this.props);
- 
-                     // verifica se o usuário logado é do tipo administrador
-                     if (parseJwt().role === '1' ) {
-                         this.props.history.push('/tiposeventos');
-                         console.log('estou logado: ' + usuarioAutenticado())
-                     }
- 
-                     else{
-                         this.props.history.push('/');
-                     }
+                    // define a variável base64 que vai receber o payload do token
+                    let base64 = localStorage.getItem('usuario-login').split('.')[1];
+                    // exibe no console do navegador o valor em base64
+                    console.log(base64);
+
+                    // exibe no console o valor decodificado de base64 para string
+                    // console.log(window.atob(base64));
+
+                    // exibe no console do navegador o valor da chave role
+                    // console.log( JSON.parse( window.atob(base64) ) );
+
+                    // console.log( parseJwt().role );
+
+                    // exibe as propriedades da página
+                    console.log(this.props);
+
+                    // verifica se o usuário logado é do tipo administrador
+                    if (parseJwt().role === '1') {
+                        this.props.history.push('/tiposeventos');
+                        console.log('estou logado: ' + usuarioAutenticado())
+                    }
+
+                    else {
+                        this.props.history.push('/');
+                    }
 
                 }
             })
 
 
-        //Caso haja algum erro
-        .catch (() => {
-            //Define o valor do state ErrorMessage com uma mensagem personalizada
-            this.setState({ errorMessage: "E-mail e/ou senha inválidos!" , isLoading: false})
-        })
+            //Caso haja algum erro
+            .catch(() => {
+                //Define o valor do state ErrorMessage com uma mensagem personalizada
+                this.setState({ errorMessage: "E-mail e/ou senha inválidos!", isLoading: false })
+            })
     }
 
 
@@ -87,7 +90,11 @@ export default class Login extends Component {
         return (
             <div>
                 <main>
-                    <section>
+                    <section className="container-login flex">
+
+                        <div className="img__login"><div className="img__overlay"></div></div>
+
+
                         <p>Bem vindo(a)! <br />Faça login para acessar a sua conta.</p>
 
                         {/*Faz a chamada para a função de login quando o botão é pressionado */}
@@ -99,22 +106,24 @@ export default class Login extends Component {
                             <input type="text" name="email" value={this.state.email} onChange={this.atualizaStateCampo} placeholder="Username" />
                             <input type="text" name="senha" value={this.state.senha} onChange={this.atualizaStateCampo} placeholder="Password" />
 
-                            {/* Exibe a mensagem de erro ao tentar logar com credenciais inválidas  */}
-                            <p style={{ color: 'red' }}>{this.state.errorMessage}</p>
+                            <div className="item">
+                                {/* Exibe a mensagem de erro ao tentar logar com credenciais inválidas  */}
+                                <p style={{ color: 'red' }}>{this.state.errorMessage}</p>
 
-                            {/* Verifica se a requisição esta em andamento e se estiver, desabilita o click do botão */}
+                                {/* Verifica se a requisição esta em andamento e se estiver, desabilita o click do botão */}
 
-                            {
-                                //Caso seja true, renderiza o botão desabilitado com o texto 'Loading...'
-                                this.state.isLoading === true &&
-                                <button type="submit" disabled >Loading...</button>
+                                {
+                                    //Caso seja true, renderiza o botão desabilitado com o texto 'Loading...'
+                                    this.state.isLoading === true &&
+                                    <button  className="btn btn__login" id="btn__login" type="submit" disabled >Loading...</button>
 
-                            }
+                                }
 
-                            {
-                                //Caso seja false, renderiza o botão habilitado com o texto 'Login'
-                                <button type="submit" disabled={this.state.email === '' || this.state.senha === ''? 'none' : ''} >Login</button>
-                            }
+                                {
+                                    //Caso seja false, renderiza o botão habilitado com o texto 'Login'
+                                    <button  className="btn btn__login" id="btn__login" type="submit" disabled={this.state.email === '' || this.state.senha === '' ? 'none' : ''} >Login</button>
+                                }
+                            </div>
 
                         </form>
                     </section>
