@@ -2,7 +2,7 @@ import { Component } from 'react';
 import axios from 'axios';
 
 
-export default class Eventos extends Component {
+export default class EventosAdm extends Component {
     constructor(props) {
         super(props);
         this.state = {

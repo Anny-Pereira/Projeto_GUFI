@@ -11,7 +11,8 @@ import App from './Pages/Home/App';
 import TiposEventos from './Pages/tiposEventos/TiposEventos'
 import NotFound from './Pages/NotFound/NotFound';
 import Login from './Pages/login/login'
-import Eventos from './Pages/eventos/eventos';
+import EventosAdm from './Pages/eventosAdm/eventosAdm';
+import MeusEventos from './Pages/meusEventos/meusEventos';
 import TiposUsuarios from './Pages/tiposUsuarios/tiposUsuarios';
 import Perfil from './Pages/perfil/perfil';
 
@@ -56,7 +57,8 @@ const routing = (
         <PermissaoAdm path="/tiposEventos" component={TiposEventos} /> {/* Tipos Eventos */}
         <Route path="/notFound" component={NotFound} /> {/* Not Found */}
         <Route path="/login" component={Login} /> {/* Login */}
-        <Route path="/eventos" component={Eventos} /> {/* Redireciona para Eventos */}
+        <PermissaoAdm path="/eventosAdm" component={EventosAdm} /> {/* Redireciona para EventosAdm */}
+        <Route path="/meusEventos" component={MeusEventos} /> {/* Redireciona para meusEventos */}
         <Route path="/tipoUsuarios" component={TiposUsuarios} /> {/* Redireciona para TiposUsuarios */}
         <Route path="/perfil" component={Perfil} /> {/* Redireciona para Perfil */}
         <Redirect to="/notFound" /> {/* Redireciona para Not Found caso não encontre nenhuma rota */}

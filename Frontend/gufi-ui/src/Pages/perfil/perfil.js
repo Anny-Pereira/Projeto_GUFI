@@ -40,7 +40,7 @@ export default class Perfil extends Component {
 
                 .then(console.log('Upload realizado!'))
 
-                .cath((erro) => console.log(erro))
+                .catch((erro) => console.log(erro))
 
                 .then(this.buscarImg);
         }
